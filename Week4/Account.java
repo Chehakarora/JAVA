@@ -1,50 +1,52 @@
 public class Account
 {
-    private String accnum;
-    private String ownernum;
+    private String accountNumber;
+    private String ownerName;
     private double balance;
 
-    public Account(String accnum,String ownernum)
+    public Account(String accountNumber,String ownerName)
     {
-        this(accnum,ownernum,0.0);
+        this.accountNumber=accountNumber;
+        this.ownerName=ownerName;
+        this.balance=0;
     }
 
-    public Account(String accnum,String ownernum,double balance)
+    public Account(String accountNumber,String ownerName,double balance)
     {
-        if(balance<0)
-            throw new IllegalArgumentException("Opening balance cannot be negative");
-
-        this.accnum=accnum;
-        this.ownernum=ownernum;
-        this.balance=balance;
+        this.accountNumber=accountNumber;
+        this.ownerName=ownerName;
+        if(balance>=0)
+            this.balance=balance;
     }
 
     public boolean deposit(double amount)
     {
-        if(amount<=0)
-            return false;
-
-        balance+=amount;
-        return true;
+        if(amount>0)
+        {
+            balance+=amount;
+            return true;
+        }
+        return false;
     }
 
     public boolean withdraw(double amount)
     {
-        if(amount<=0||amount>balance)
-            return false;
-
-        balance-=amount;
-        return true;
+        if(amount>0&&amount<=balance)
+        {
+            balance-=amount;
+            return true;
+        }
+        return false;
     }
 
-    public String getaccnum()
+    public String getAccountNumber()
     {
-        return accnum;
+        return accountNumber;
     }
 
-    public String getownernum()
+    public String getOwnerName()
     {
-        return ownernum;
+        return ownerName;
     }
 
     public double getBalance()
@@ -54,6 +56,6 @@ public class Account
 
     public String toString()
     {
-        return "Account{accnum='"+accnum+"', ownernum='"+ownernum+"', balance="+balance+"}";
+        return "Account{accountNumber='"+accountNumber+"', ownerName='"+ownerName+"', balance="+balance+"}";
     }
 }
